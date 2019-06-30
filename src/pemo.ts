@@ -59,7 +59,10 @@ export function generatePemo(text: string, tokenizer: Tokenizer) {
 		const l = _.last(pemoTexts)
 		if (!l || l.length === 2) {
 			if (pemo.tail) {
-				pemoTexts.push(['ぺー', pemo.text])
+				pemoTexts.push([
+					_.get(pemoTexts, [pemoTexts.length - 2, 1]) || 'ぺも',
+					pemo.text,
+				])
 			} else {
 				pemoTexts.push([pemo.text])
 			}
