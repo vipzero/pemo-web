@@ -44,9 +44,77 @@ const joshi: Record<string, string> = {
 	など: 'っろ',
 }
 
+// exclude "を", include ぱ行, "っ", "ー"
+const allCharas = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよわんぱぴぷぺぽっー'.split(
+	''
+)
+
+const level1Chars = ['ぺ']
+const level2Chars = ('も' + 'ぱぴぷぽ').split('')
+const level3Chars = ('まみむめ' + 'らりるれろ' + 'け' + 'ん').split('')
+const level4Chars = 'っー'.split('')
+const level5Chars = _.difference(
+	allCharas,
+	level1Chars,
+	level2Chars,
+	level3Chars,
+	level4Chars
+)
+console.log(level5Chars.length)
+
+type LevelSet = {
+	charas: string[]
+	weight: number
+	weightTop: number
+}
+
+const levelSets: LevelSet[] = [
+	{
+		charas: level1Chars,
+		weight: 10,
+		weightTop: 10,
+	},
+	{
+		charas: level2Chars,
+		weight: 36,
+		weightTop: 46,
+	},
+	{
+		charas: level3Chars,
+		weight: 44,
+		weightTop: 90,
+	},
+	{
+		charas: level4Chars,
+		weight: 5,
+		weightTop: 95,
+	},
+	{
+		charas: level5Chars,
+		weight: 5,
+		weightTop: 100,
+	},
+]
+
+function charToPemoChar(c: string): string {
+	const nl = c.charCodeAt(0)
+	const n = nl % 100
+	const level = levelSets.find(level => n < level.weightTop)
+	if (!level) {
+		return '？'
+	}
+	return level.charas[nl % level.charas.length]
+}
+
+function pemoraNormalize(word: string): string {
+	return word.replace(/^ー/, 'ぺ')
+}
+
 export function generatePemora(text: string): string {
-	const bt = base64.encode(text)
-	return 'pemorad'
+	const pemoChars = text.split('').map(charToPemoChar)
+	return _.chunk(pemoChars, 4)
+		.map(cs => pemoraNormalize(cs.join('')))
+		.join('　')
 }
 
 export async function generatePemon(text: string) {

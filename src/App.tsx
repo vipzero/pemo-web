@@ -30,11 +30,11 @@ function App() {
 				value={text}
 				onChange={e => {
 					setText(e.target.value)
+					setPemoraText(generatePemora(e.target.value))
 				}}
 			/>
 			<Button
 				onClick={async () => {
-					setPemoraText(generatePemora(text))
 					setPemonText(await generatePemon(text))
 					setPemo(await generatePemo(text))
 				}}
