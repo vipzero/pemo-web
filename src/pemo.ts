@@ -44,7 +44,7 @@ export async function generatePemo(text: string) {
 	}
 
 	// Detects the sentiment of the text
-	const res = axios.post(
+	const res = await axios.post(
 		'https://language.googleapis.com/v1/documents:analyzeSyntax',
 		{
 			encodingType: 'UTF8',

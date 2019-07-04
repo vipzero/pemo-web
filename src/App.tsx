@@ -5,7 +5,6 @@ import { Button } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
-const toj = (a: any) => JSON.stringify(a, null, '\t')
 function App() {
 	const [text, setText] = useLocalStorage<string>(
 		'text',
@@ -43,12 +42,6 @@ function App() {
 					setText(e.target.value)
 				}}
 			/>
-			<Typography variant="h6">でばっぐ</Typography>
-			<Typography variant="h6">定義済み</Typography>
-			<ul>
-				<li>格助詞</li>
-				<li>接続助詞</li>
-			</ul>
 		</div>
 	)
 }
