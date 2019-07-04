@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import axios from 'axios'
+import { base64 } from './utils'
 
 const langClient = axios.create({
 	baseURL: `https://language.googleapis.com/v1/documents:analyzeSyntax?key=${
@@ -17,11 +18,6 @@ const postAnalyze = (content: string) =>
 			type: 'PLAIN_TEXT',
 		},
 	})
-
-const base64 = {
-	encode: (str: string) => btoa(unescape(encodeURIComponent(str))),
-	decode: (str: string) => decodeURIComponent(escape(atob(str))),
-}
 
 const head = ['ぺも', 'も', 'と', 'ぺも', 'ぷも', 'おり', 'ぷ', 'ぽ']
 const joshi: Record<string, string> = {
@@ -49,10 +45,12 @@ const joshi: Record<string, string> = {
 }
 
 export function generatePemora(text: string): string {
+	const bt = base64.encode(text)
 	return 'pemorad'
 }
 
 export async function generatePemon(text: string) {
+	base64.encode(text)
 	return '開発中'
 }
 
