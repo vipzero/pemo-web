@@ -44,12 +44,24 @@ function App() {
 			<Typography variant="h5">ぺもら語</Typography>
 			<Typography>ランダム・一意・非可逆</Typography>
 			<TextField fullWidth variant="outlined" value={pemoraText} />
+			<pre>
+				<code>
+					{pemoraText}
+					<br />({text})
+				</code>
+			</pre>
 			<Typography variant="h5">ぺもん語</Typography>
 			<Typography>長い・一意・可逆</Typography>
 			<TextField fullWidth variant="outlined" value={pemonText} />
 			<Typography variant="h5">ぺも語</Typography>
 			<Typography>一意・可逆</Typography>
 			<TextField fullWidth variant="outlined" value={pemoText} />
+			<hr />
+			<Typography>
+				<a href="https://github.com/vipzero/pemo-web/wiki">
+					りもみぱ　りみぷ(けんきゅうじょ)
+				</a>
+			</Typography>
 		</div>
 	)
 }
